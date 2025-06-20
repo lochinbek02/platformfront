@@ -1,0 +1,145 @@
+/* Sahifadagi elementlarni o'rtaga joylash */
+.container-grapht {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  /* Jadval uchun uslub */
+  .styled-table-grapht {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .styled-table-grapht thead tr {
+    background-color: #3fbe8e;
+    color: #ffffff;
+    text-align: left;
+  }
+  
+  .styled-table-grapht th,
+  .styled-table-grapht td {
+    padding: 12px 15px;
+  }
+  
+  .styled-table-grapht tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  /* Har bir qatorga hover effekti */
+  .styled-table-grapht tbody tr:hover {
+    background-color: #f3f3f3;
+  }
+  
+  /* Tugma uchun uslub */
+  .view-button-grapht {
+    background-color: #3fbe8e;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-button-grapht:hover {
+    background-color: #0cdab7;
+  }
+  /* Natija tugmasi uchun CSS */
+.result-button-grapht {
+  background-color: #4CAF50; /* Yashil fon rangi */
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.result-button-grapht:hover {
+  background-color: #45a049; /* Hover uchun biroz to'q yashil */
+}
+
+/* Boshlash tugmasi uchun CSS */
+.start-button-grapht {
+  background-color: #008CBA; /* Ko'k fon rangi */
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.start-button-grapht:hover {
+  background-color: #007bb5; /* Hover uchun biroz to'q ko'k */
+}
+.delete-button-grapht{
+  background-color: #f03f20; /* Ko'k fon rangi */
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.delete-button-grapht:hover{
+  background-color: #f10808;
+  
+}
+
+.testview-title {
+    text-align: center;
+    margin: 2.5rem auto 1.2rem auto;
+}
+
+.testview-title h2 {
+    font-size: 2rem;
+    color: #1769aa;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.testview-title p {
+    color: #1b9999;
+    font-size: 1.1rem;
+    margin: 0;
+}
+@media (max-width: 900px) {
+  .container-grapht {
+    padding: 0 0.2rem;
+  }
+  .styled-table-grapht {
+    font-size: 15px;
+    min-width: 250px;
+  }
+}
+@media (max-width: 600px) {
+  .styled-table-grapht th,
+  .styled-table-grapht td {
+    padding: 7px 4px;
+    font-size: 13px;
+  }
+  .styled-table-grapht {
+    margin: 10px 0;
+  }
+}

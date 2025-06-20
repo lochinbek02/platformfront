@@ -1,0 +1,123 @@
+.alldisplay {
+    display: flex;
+}
+
+.fortheory {
+    margin: 20px;
+    width: 66%;
+    display: block;
+    background-color: #ffffff; /* Oq fon */
+    border-radius: 10px; /* Burchaklarni yumaloq qilish */
+    padding: 20px; /* Ichki bo'shliq */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Yengil soya qo'shish */
+    text-align: center; /* Matn markazda */
+    
+}
+
+.forpractical {
+    position: fixed; 
+    right: 20px; 
+    padding: 10px;
+    top: 50%; 
+    transform: translateY(-50%);     
+    width: 30%;     
+    z-index: 1000; 
+    
+    margin: 0 auto; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.forpractical label {
+    font-size: 16px; /* Matn hajmini belgilash */
+    color: #333; /* Matn rangi */
+    margin-bottom: 10px; /* Pastki qirralar */
+    display: block; /* Har bir labelni yangi qatorga chiqarish */
+}
+
+.forpractical input[type="number"] {
+    width: 100%; /* Kenglikni to'liq qoplash */
+    padding: 10px; /* Ichki qirralar */
+    border: 1px solid #ccc; /* Ramka */
+    border-radius: 4px; /* Burchaklarni yumshatish */
+    margin-bottom: 15px; /* Pastki qirralar */
+    font-size: 16px; /* Matn hajmi */
+}
+.newAtribute{
+    display: flex;
+    
+}
+.forpractical button {
+    background-color: #4CAF50; /* Tugma foni rangi */
+    color: white; /* Tugma matni rangi */
+    padding: 10px 15px; /* Ichki qirralar */
+    border: none; /* Ramkasiz */
+    border-radius: 4px; /* Burchaklarni yumshatish */
+    cursor: pointer; /* Kursor o'zgarishi */
+    font-size: 16px; /* Matn hajmi */
+    transition: background-color 0.3s; /* O'zgarishlarga animatsiya qo'shish */
+}
+
+.forpractical button:hover {
+    background-color: #45a049; /* Hover holatidagi rang o'zgarishi */
+}
+
+.forpractical video {
+    display: block; /* Video elementini yangi qatorga chiqarish */
+    margin-top: 20px; /* Yuqori qirralar */
+    max-width: 100%; /* Kenglikni 100% dan oshmasligi */
+}
+
+.forpractical h2 {
+    font-size: 18px; /* Sarlavha hajmi */
+    color: #333; /* Matn rangi */
+    margin-top: 20px; /* Yuqori qirralar */
+}
+.fortheory h1 {
+    font-size: 2rem; 
+    margin-bottom: 10px; 
+    /* color: #333333;  */
+    color: #307b7e;;
+}
+
+.fortheory p {
+    font-size: 1.1rem; /* Matn kattaligi */
+    color: #666666; /* Matnning qo'shimcha rangi */
+    line-height: 1.5; /* Matn o'rtasidagi masofa */
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+    margin:20px auto;
+    width: 70px;
+    aspect-ratio: 1;
+    display: grid;
+    
+  }
+  .loader::before,
+  .loader::after {    
+    content:"";
+    grid-area: 1/1;
+    --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
+    background: 
+      var(--c) 50%  0, 
+      var(--c) 50%  100%, 
+      var(--c) 100% 50%, 
+      var(--c) 0    50%;
+    background-size: 12px 12px;
+    animation: l12 1s infinite;
+  }
+  .loader::before {
+    margin: 4px;
+    filter: hue-rotate(45deg);
+    background-size: 8px 8px;
+    animation-timing-function: linear
+  }
+  
+  @keyframes l12 { 
+    100%{transform: rotate(.5turn)}
+  }
+  

@@ -1,0 +1,209 @@
+.container-graphv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 36px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.card {
+  background: #f8fafc;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44,83,100,0.10);
+  border: 1.5px solid #e3e8ee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  transition: box-shadow 0.22s, transform 0.18s, border 0.18s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(25, 118, 237, 0.18);
+  border: 1.5px solid #1976ed33;
+  transform: translateY(-4px) scale(1.025);
+  background: #f1f7fd;
+}
+
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #fff;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  padding: 18px 0 0 0;
+}
+
+.card-body {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 18px 18px 18px;
+}
+
+.card-title1112 {
+
+  color: #222;
+  font-weight: 600; 
+  /* letter-spacing: 0.3px; */
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.pdf-view-link, .batafsil, .deleteitem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* min-width: 140px; */
+  height: 35px;
+  text-align: center;
+  padding: 0 22px;
+  /* font-size: 1.1em; */
+  font-weight: 500;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px #1976ed22;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
+}
+.deleteitem{
+  font-size: 1.1rem;
+}
+.pdf-view-link, .batafsil {
+  background: #2988ee;
+  color: #fff;
+  text-decoration: none;
+}
+
+.pdf-view-link:hover, .batafsil:hover {
+  background: #1256b3;
+  box-shadow: 0 6px 18px #1976ed33;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.deleteitem {
+  background: linear-gradient(90deg, #f46969 0%, #fd5151 100%);
+  color: #fff;
+}
+
+.deleteitem:hover {
+  background: linear-gradient(90deg, #fd5151 0%, #f46969 100%);
+  box-shadow: 0 6px 18px #f4696933;
+  transform: translateY(-2px) scale(1.04);
+}
+
+
+/* MainView.css */
+
+.main-view-form {
+
+  max-width: 70%; /* Formani kengligini belgilash */
+  margin: 20px auto; /* Markazlashtirish */
+  padding: 20px;
+  border: 1px solid #ccc; /* Chizik */
+  border-radius: 5px; /* Burchaklar yumshatish */
+  background-color: #f9f9f9; /* Orqa fon rangi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soyalar */
+}
+
+.main-view-form h2 {
+  margin-bottom: 20px; /* Sarlavha bilan boshqa elementlar o'rtasidagi masofa */
+}
+
+.main-view-form input[type="text"],
+.main-view-form input[type="file"] {
+  width: 100%; /* Inputlarni kengligiga moslashtirish */
+  padding: 10px;
+  margin-bottom: 15px; /* Katta bo'shliq */
+  border: 1px solid #ccc; /* Chizik */
+  border-radius: 4px; /* Burchaklar yumshatish */
+}
+
+.main-view-form button {
+  padding: 10px 15px; /* Tugmani o'lchami */
+  background-color: #2988ee; /* Tugma rangi */
+  color: white; /* Matn rangi */
+  border: none; /* Chizik yo'q */
+  border-radius: 4px; /* Burchaklar yumshatish */
+  cursor: pointer; /* Ko'rsatkich */
+  transition: background-color 0.3s; /* Rang o'tish effekti */
+}
+
+.main-view-form button:hover {
+  background-color: #0056b3; /* Hover effekti */
+}
+.ckditor-submit{
+  margin: 5px auto;
+}
+
+
+.form-container {
+  margin: 0 10px;
+  display: flex;
+  gap: 20px;
+}
+
+.main-view-form, .pdf-upload-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pdf-upload-form {
+  max-width: 70%; /* Formani kengligini belgilash */
+  margin: 20px auto; /* Markazlashtirish */
+  padding: 20px;
+  border: 1px solid #ccc; /* Chizik */
+  border-radius: 5px; /* Burchaklar yumshatish */
+  background-color: #f9f9f9; /* Orqa fon rangi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soyalar */
+}
+
+.pdf-upload-form h2 {
+  margin-bottom: 20px; /* Sarlavha bilan boshqa elementlar o'rtasidagi masofa */
+}
+
+.pdf-upload-form input[type="text"],
+.pdf-upload-form input[type="file"] {
+  width: 100%; /* Inputlarni kengligiga moslashtirish */
+  padding: 10px;
+  margin-bottom: 15px; /* Katta bo'shliq */
+  border: 1px solid #ccc; /* Chizik */
+  border-radius: 4px; /* Burchaklar yumshatish */
+}
+
+.pdf-upload-form button {
+  padding: 10px 15px; /* Tugmani o'lchami */
+  background-color: #2988ee; /* Tugma rangi */
+  color: white; /* Matn rangi */
+  border: none; /* Chizik yo'q */
+  border-radius: 4px; /* Burchaklar yumshatish */
+  cursor: pointer; /* Ko'rsatkich */
+  transition: background-color 0.3s; /* Rang o'tish effekti */
+}
+
+.pdf-upload-form button:hover {
+  background-color: #0056b3; /* Hover effekti */
+}

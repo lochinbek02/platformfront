@@ -1,0 +1,65 @@
+/* Test komponenti uchun umumiy konteyner */
+.test-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sarlavha */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Savollar uchun blok */
+.question-block {
+    margin-bottom: 20px;
+}
+
+/* Savol matni */
+.question {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Variantlar bloki */
+.options {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Har bir variant uchun */
+.option {
+    font-size: 1rem;
+    color: #333;
+    padding: 5px;
+}
+
+/* Tugma uslubi */
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Yuklanayotgan holat */
+.loading {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #666;
+}
