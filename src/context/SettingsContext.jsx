@@ -91,6 +91,18 @@ export const SettingsProvider = ({ children }) => {
         document.body.classList.toggle('dark-mode', preferences.darkMode);
     }, []);
 
+    // Sahifa yuklanganda localStorage dan user ma'lumotlarini olish
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('userName');
+        const storedEmail = localStorage.getItem('userEmail');
+        if (storedUsername || storedEmail) {
+            setUser({
+                username: storedUsername || '',
+                email: storedEmail || ''
+            });
+        }
+    }, []);
+
     const value = React.useMemo(() => ({
         preferences,
         user,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API manzilini bitta o'zgaruvchida saqlaymiz
-export const API_URL = 'https://tunes-cultural-handle-listing.trycloudflare.com';
+export const API_URL = 'http://localhost:8087';
 export const API_BASE_URL = `${API_URL}/api/`;
 
 // Video URL ni to'g'ri hosil qilish (global helper)

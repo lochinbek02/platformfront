@@ -205,6 +205,7 @@ const AppContent = () => {
           setMessage={setMessage}
           setIsAuthenticated={setIsAuthenticated}
           setIsSuperAdmin={setIsSuperAdmin}
+          onLoginSuccess={fetchSettings}
         />
       )}
     </>

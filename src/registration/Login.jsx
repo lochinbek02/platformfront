@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axiosInstance/axiosInstance';
 import './Login.css'
 
-const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => {
+const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin, onLoginSuccess }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -34,6 +34,16 @@ const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => 
             localStorage.setItem('user_id', userId);
             localStorage.setItem('isAuthenticated', 'true');
 
+            // Username va email saqlash (agar backend qaytarsa)
+            if (response.data.username) {
+                localStorage.setItem('userName', response.data.username);
+            } else {
+                localStorage.setItem('userName', username); // Kiritilgan username
+            }
+            if (response.data.email) {
+                localStorage.setItem('userEmail', response.data.email);
+            }
+
             const isSuperuser = response.data.is_superuser;
             const isStaff = response.data.is_staff;
 
@@ -52,6 +62,11 @@ const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => 
             }
 
             setIsAuthenticated(true);
+
+            // Login muvaffaqiyatli bo'lgandan keyin settings ni yuklash
+            if (onLoginSuccess) {
+                onLoginSuccess();
+            }
         } catch (error) {
             setMessage('Login failed');
             localStorage.removeItem('access');
