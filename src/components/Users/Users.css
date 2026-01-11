@@ -1,0 +1,194 @@
+/* ===== USERS CONTENT CARD ===== */
+.users-content-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.table-header-tools {
+    padding: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px 12px 48px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: var(--bg-card);
+}
+
+/* ===== MODERN TABLE ===== */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modern-table th {
+    background: var(--bg-secondary);
+    padding: 16px 24px;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modern-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.modern-table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.02);
+}
+
+/* User Cell */
+.user-info-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-initials {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.user-username {
+    font-weight: 600;
+}
+
+/* Role Tags */
+.role-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.role-tag.admin {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.role-tag.teacher {
+    background: #f0fdfa;
+    color: #0d9488;
+}
+
+.role-tag.student {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+/* Status Dot */
+.status-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-dot::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+}
+
+.status-dot.active {
+    color: #059669;
+}
+
+/* Action Buttons */
+.action-buttons-group {
+    display: flex;
+    gap: 8px;
+}
+
+.table-action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.table-action-btn.edit {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+}
+
+.table-action-btn.edit:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+.table-action-btn.delete {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.table-action-btn.delete:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+
+    .modern-table th:nth-child(2),
+    .modern-table td:nth-child(2) {
+        display: none;
+    }
+}

@@ -1,108 +1,185 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axiosInstance, { getVideoUrl } from '../../axiosInstance/axiosInstance';
+import { Link } from 'react-router-dom';
+import { FaArrowLeft, FaPlay, FaCalculator, FaVideo } from 'react-icons/fa';
 import './Theme.css';
-// import image from '/C:/Users/User/Desktop/platform/Limitimage.png'
 import videoFile3 from '../../../public/videos/4_funksiya_limit/4_1.mp4';
 import videoFile from '../../../public/videos/4_funksiya_limit/4_2.mp4';
 
 function Theme() {
   const [epsilon, setEpsilon] = useState('');
-  const [videoUrl, setVideoUrl] = useState(''); // Video URL uchun state
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [videoUrl, setVideoUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  // Epsilon qiymatini yangilash
+  // Default videolar uchun state
+  const [defaultVideos, setDefaultVideos] = useState([]);
+  const [loadingDefaults, setLoadingDefaults] = useState(true);
+
+  // Default videolarni API dan olish
+  useEffect(() => {
+    const fetchDefaultVideos = async () => {
+      try {
+        const response = await axiosInstance.get('limit-graph-default-video/');
+        setDefaultVideos(response.data);
+      } catch (error) {
+        console.error('Default videolarni yuklashda xatolik:', error);
+      } finally {
+        setLoadingDefaults(false);
+      }
+    };
+
+    fetchDefaultVideos();
+  }, []);
+
   const handleInputChange = (event) => {
     setEpsilon(event.target.value);
   };
 
-  // Formani yuborish
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Formaning default behaviorini to'xtatish
-    setIsLoading(true); // Loadingni yoqish
+    event.preventDefault();
+    setIsLoading(true);
     setVideoUrl('');
     try {
-      const response = await fetch('http://localhost:8000/api/create-video/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ epsilon: parseFloat(epsilon) }), // Epsilonni JSON formatida yuborish
+      const response = await axiosInstance.post('create-video/', {
+        epsilon: parseFloat(epsilon)
       });
 
-      const data = await response.json();
-      if (response.ok) {
-        console.log(data); // Yuborilgan javobni konsolga chiqarish
-        setVideoUrl(data.video_path); // Video URL'ni state ga qo'shish
+      if (response.data.video_path) {
+        setVideoUrl(response.data.video_path);
       } else {
-        console.error('Error:', data.message); // Xatolarni konsolga chiqarish
+        console.error('Error:', response.data.message);
       }
     } catch (error) {
-      console.error('Error:', error); // Xatolarni konsolga chiqarish
+      console.error('Error:', error);
     } finally {
-      setIsLoading(false); // Loadingni o'chirish
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className='alldisplay'>
-      <div className="fortheory">
-        <h1>Funksiya limitini Koshi ta’rifi (ε-δ)  yordamida ko‘rsatish bo‘yicha imitatsion model</h1>
-        <p>
-        
-        Ushbu amaliyotda ixtiyoriy musbat epsilon sonni kiriting va yuborish tugmasini bosing. Natijada sizga mana shu jarayonning video formati taqdim etiladi.
-        Ushbu vizuallashtirish jarayoni orqali siz ixtiyoriy musbat epsilon(ε) soni olinganganda ham, shunday δ musbat son topilib, a=2 ning δ atrofidan olingan ixtiyoriy x larning  f(x)=x<sup>2 </sup> 
-        funksiyadagi qaiymatlari b=4 ning ε atrofida joylashishini kuzatish va tahlil qilib o‘rganish imkoniyatiga ega bo‘lasiz.
+    <div className="page-container">
+      <div className="detailed-view theme-study-view">
+        <Link to="/models" className="back-btn">
+          <FaArrowLeft /> Orqaga
+        </Link>
 
-         </p>
-        <div className="newAtribute" style={{margin:'0 auto'}}>
-        <div className="" style={{ maxWidth: '50%' ,margin:'10px'}}>
-       
-          <video width="600" controls  style={{ maxWidth: '100%', margin:'0'}}>
-              <source src={videoFile3} type="video/mp4" />
-              Sizning brauzeringiz video oynasini qo'llab-quvvatlamaydi.
-            </video>
+        <div className="article-header">
+          <h1 className="article-title">Funksiya limitini Koshi ta'rifi (ε-δ) bo'yicha imitatsion model</h1>
+          <p className="article-intro">
+            Ushbu amaliyotda ixtiyoriy musbat epsilon sonni kiriting va yuborish tugmasini bosing.
+            Natijada sizga mana shu jarayonning video formati taqdim etiladi.
+          </p>
         </div>
-        <div className="" style={{ maxWidth:'50%',margin:'10px'}}>
-        
-        <video width="600" controls style={{ maxWidth: '100%' ,margin:'0'}}>
-              <source src={videoFile} type="video/mp4" />
-              Sizning brauzeringiz video oynasini qo'llab-quvvatlamaydi.
-            </video>
 
-        </div>
-        </div>
-        
-            
-      </div>
-      
-      <div className="forpractical">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="epsilonInput">Epsilonning qiymatini kiriting:</label>
-          
-          <input
-            id="epsilonInput"
-            type="number"
-            value={epsilon}
-            onChange={handleInputChange}
-            required // Make input required
-          />
-          <br />
-          <button type="submit">Yuborish</button>
-        </form>
-        {/* <p>{`http://localhost:8000/media/videos/videos/1080p60/limit_graph.mp4`}</p> */}
-        
-        {isLoading && <div className="loader"></div>} 
-        {isLoading && <h2 style={{textAlign:'center'}}>Loading...</h2>}
-        {videoUrl && (
-          <div>
-
-            
-            <h2>Yaratilgan video:</h2>
-            <video width="600" controls style={{ maxWidth: '100%' }}>
-              <source src={`http://localhost:8000/${videoUrl}`} type="video/mp4" />
-              Sizning brauzeringiz video oynasini qo'llab-quvvatlamaydi.
-            </video>
+        <div className="theme-content-grid">
+          <div className="theory-section-card">
+            <h3>Vizualizatsiya</h3>
+            <div className="theme-videos-grid">
+              <div className="video-card-simple">
+                <video controls>
+                  <source src={videoFile3} type="video/mp4" />
+                </video>
+                <span>Vizuallashtirish 1</span>
+              </div>
+              <div className="video-card-simple">
+                <video controls>
+                  <source src={videoFile} type="video/mp4" />
+                </video>
+                <span>Vizuallashtirish 2</span>
+              </div>
+            </div>
+            <div className="theory-text-block">
+              <p>
+                Ushbu vizuallashtirish jarayoni orqali siz ixtiyoriy musbat epsilon(ε) soni olinganganda ham,
+                shunday δ musbat son topilib, a=2 ning δ atrofidan olingan ixtiyoriy x larning f(x)=x<sup>2</sup>
+                funksiyadagi qiymatlari b=4 ning ε atrofida joylashishini kuzatish imkoniyatiga ega bo'lasiz.
+              </p>
+            </div>
           </div>
-        )}
+
+          <div className="practical-section-card">
+            <div className="card-header-icon">
+              <FaCalculator />
+              <h3>Amaliy mashg'ulot</h3>
+            </div>
+
+            <form onSubmit={handleSubmit} className="calculation-form">
+              <div className="form-group">
+                <label htmlFor="epsilonInput">Epsilon (ε) qiymatini kiriting:</label>
+                <input
+                  id="epsilonInput"
+                  type="number"
+                  step="0.01"
+                  min="0.01"
+                  value={epsilon}
+                  onChange={handleInputChange}
+                  placeholder="Masalan: 0.05"
+                  required
+                />
+              </div>
+              <button type="submit" className="calculate-btn" disabled={isLoading}>
+                {isLoading ? 'Tayyorlanmoqda...' : <><FaPlay /> Yuborish</>}
+              </button>
+            </form>
+
+            {videoUrl && (
+              <div className="result-video-area">
+                <h4>Yaratilgan video:</h4>
+                <div className="result-video-wrapper">
+                  <video controls key={videoUrl}>
+                    <source src={getVideoUrl(videoUrl)} type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+            )}
+
+            {isLoading && (
+              <div className="simulation-loader">
+                <div className="spinner"></div>
+                <p>Simulyatsiya tayyorlanmoqda...</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Default Videolar Bo'limi */}
+        <div className="default-videos-section">
+          <div className="section-header">
+            <FaVideo className="section-icon" />
+            <h2>Tayyor simulyatsiyalar</h2>
+            <p>Turli epsilon qiymatlar uchun oldindan tayyorlangan simulyatsiyalar</p>
+          </div>
+
+          {loadingDefaults ? (
+            <div className="loading-defaults">
+              <div className="spinner"></div>
+              <p>Yuklanmoqda...</p>
+            </div>
+          ) : defaultVideos.length > 0 ? (
+            <div className="default-videos-grid">
+              {defaultVideos.map((video) => (
+                <div key={video.id} className="default-video-card">
+                  <div className="video-wrapper">
+                    <video controls>
+                      <source src={getVideoUrl(video.video)} type="video/mp4" />
+                      Brauzeringiz video formatini qo'llab-quvvatlamaydi.
+                    </video>
+                  </div>
+                  <div className="video-info">
+                    <h4>{video.title}</h4>
+                    <span className="epsilon-badge">ε = {video.epsilon}</span>
+                    {video.description && <p>{video.description}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="no-videos-message">
+              <p>Hozircha tayyor simulyatsiyalar mavjud emas</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

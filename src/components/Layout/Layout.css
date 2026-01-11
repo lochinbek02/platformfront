@@ -1,0 +1,34 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg-color);
+}
+
+/* ===== MAIN CONTENT AREA ===== */
+.layout-main {
+    flex: 1;
+    margin-left: 300px;
+    min-height: 100vh;
+    padding: 24px 32px;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-color);
+}
+
+/* When sidebar is collapsed - handled via JS if needed */
+.layout.sidebar-collapsed .layout-main {
+    margin-left: 80px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .layout-main {
+        margin-left: 0;
+        padding: 80px 16px 24px 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .layout-main {
+        padding: 72px 12px 20px 12px;
+    }
+}

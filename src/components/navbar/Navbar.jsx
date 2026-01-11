@@ -30,7 +30,7 @@ function Navbar({ setIsAuthenticated, isSuperAdmin }) {
         <nav className="navbar">
             <div className="logo">
                 <img src="https://www.samdu.uz/new/images/SamDU%20logo%20full%201.png" alt="SAMTUIT" />
-                <h1>SamDU</h1>
+                <h1>A.Safarov</h1>
             </div>
             <ul className="nav-links">
                 {navLinks.map(link => (

@@ -1,40 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import axiosInstance, { API_URL } from '../../../axiosInstance/axiosInstance';
+import { useParams, Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 import './Themes.css';
 
 function Themes() {
     const { id } = useParams();
     const [selectedArticle, setSelectedArticle] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchArticle = async () => {
             try {
                 if (id) {
-                    const response = await axios.get(`http://localhost:8000/api/articles/${id}/`);
+                    const response = await axiosInstance.get(`articles/${id}/`);
                     setSelectedArticle(response.data);
-                } else {
-                    console.error("ID mavjud emas");
                 }
             } catch (error) {
                 console.error("Xatolik yuz berdi:", error);
+            } finally {
+                setLoading(false);
             }
         };
-
         fetchArticle();
     }, [id]);
 
+    if (loading) {
+        return (
+            <div className="page-container">
+                <div className="loading-state">Ma'lumotlar yuklanmoqda...</div>
+            </div>
+        );
+    }
+
     if (!selectedArticle) {
-        return <div>Yuklanmoqda...</div>;
+        return (
+            <div className="page-container">
+                <div className="error-state">
+                    <p>Ma'lumot topilmadi.</p>
+                    <Link to="/mainview" className="back-link">
+                        <FaArrowLeft /> Orqaga qaytish
+                    </Link>
+                </div>
+            </div>
+        );
     }
 
     return (
-        <div className="themes-container">
-            <h1 className="themes-title">{selectedArticle.title}</h1>
-            {/* {selectedArticle.image && (
-                <img src={selectedArticle.image} alt={selectedArticle.title} className="themes-image" />
-            )} */}
-            <div className="themes-content" dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+        <div className="page-container">
+            <div className="detailed-view">
+                <Link to="/mainview" className="back-btn">
+                    <FaArrowLeft /> Orqaga
+                </Link>
+
+                <div className="article-header">
+                    <h1 className="article-title">{selectedArticle.title}</h1>
+                    {selectedArticle.image && (
+                        <div className="article-banner">
+                            <img src={`${API_URL}${selectedArticle.image}`} alt={selectedArticle.title} />
+                        </div>
+                    )}
+                </div>
+
+                <div className="article-content">
+                    <div
+                        className="content-body"
+                        dangerouslySetInnerHTML={{ __html: selectedArticle.content }}
+                    />
+                </div>
+            </div>
         </div>
     );
 }

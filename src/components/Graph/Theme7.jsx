@@ -1,40 +1,42 @@
-import React from 'react'
-// import videoFile1 from '../../../public/videos/PlotConditionalGraphs2.mp4';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
+import './Theme.css';
 import videoFile2 from '../../../public/videos/7_/7_1.mp4';
+
 function Theme7() {
   return (
-    <div className='alldisplayy'>
-      <div className="fortheoryy">
-        <h1>Uzulish turlari</h1>
-        <p>
+    <div className="page-container">
+      <div className="detailed-view theme-study-view">
+        <Link to="/models" className="back-btn">
+          <FaArrowLeft /> Orqaga
+        </Link>
 
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. In voluptatum quae dignissimos possimus unde fuga iure, nobis quod consequuntur autem. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, neque.
-
-        </p>
-        <div className="newAtributee">
-          <div className="" style={{ maxWidth: '50%', margin: '0 auto' }}>
-            
-            <video width="600" controls style={{ maxWidth: '100%', margin: '0' }}>
-              <source src={videoFile2} type="video/mp4" />
-              Sizning brauzeringiz video oynasini qo'llab-quvvatlamaydi.
-            </video>
-          </div>
-          {/* <div className="" style={{ maxWidth: '50%', margin: '10px' }}>
-            
-            <video width="600" controls style={{ maxWidth: '100%', margin: '0' }}>
-              <source src={videoFile1} type="video/mp4" />
-              Sizning brauzeringiz video oynasini qo'llab-quvvatlamaydi.
-            </video>
-
-          </div> */}
+        <div className="article-header">
+          <h1 className="article-title">Uzulish turlari</h1>
+          <p className="article-intro">
+            Funksiyaning uzilish nuqtalarini klassifikatsiyalash va tahlil qilish.
+          </p>
         </div>
 
-        {/* Include your descriptive text here */}
+        <div className="theme-content-grid single-col">
+          <div className="theory-section-card">
+            <div className="video-main-wrapper">
+              <video controls>
+                <source src={videoFile2} type="video/mp4" />
+              </video>
+            </div>
+            <div className="theory-text-block" style={{ marginTop: '24px' }}>
+              <p>
+                Ushbu bo'limda funksiyaning birinchi va ikkinchi tur uzilish nuqtalari,
+                tuzatish mumkin bo'lgan uzilishlar haqida batafsil ma'lumot olasiz.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      
     </div>
   );
 }
 
-export default Theme7
+export default Theme7;

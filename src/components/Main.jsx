@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../axiosInstance/axiosInstance';
 import './Main.css'
 import Footer from './footer/Footer';
 import { FaUsers, FaFileAlt, FaCheckCircle, FaBookOpen, FaMobileAlt, FaChalkboardTeacher, FaChartLine, FaQuestionCircle, FaVideo, FaRocket } from 'react-icons/fa';
@@ -13,7 +13,6 @@ function Main() {
     { icon: <FaBookOpen />, label: "Mavzular", value: 18 },
   ];
 
-  // Platforma afzalliklari
   const features = [
     { icon: <FaChalkboardTeacher />, title: "Interaktiv darslar", desc: "Har bir mavzu uchun animatsiya va video darslar mavjud." },
     { icon: <FaCheckCircle />, title: "Test va baholash", desc: "O‘zini-o‘zi baholovchi testlar va natijalarni ko‘rish imkoniyati." },
@@ -40,9 +39,8 @@ function Main() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // API endpointingizni shu yerga yozing
-      const response = await axios.post('http://localhost:8000/api/questions/', formData);
-      
+      const response = await axiosInstance.post('questions/', formData);
+
       if (response.status === 201) {
         alert("Savolingiz muvaffaqiyatli yuborildi!");
         setIsModalOpen(false);

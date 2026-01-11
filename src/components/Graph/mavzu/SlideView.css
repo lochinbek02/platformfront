@@ -1,147 +1,18 @@
-.container-graphslide {
+/* SlideView inherits from MainView.css - import shared styles */
+@import './MainView.css';
+
+/* PPT specific placeholder */
+.ppt-placeholder {
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  font-size: 3.5rem;
+  color: #f59e0b;
 }
 
-.cards-containerslide {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.cardslide {
-  width: 400px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  position: relative;
-  overflow: hidden;
-  padding: 15px; /* Ensure padding is set for the whole card */
-}
-
-.card-bodyslide {
-  display: flex;
-  flex-direction: row; /* Arrange title and buttons in a row */
-  justify-content: space-between; /* Space between title and buttons */
-  align-items: center; /* Center vertically */
-  width: 100%; /* Allow full width for alignment */
-}
-
-.card-title1 {
-  display: block;
-  max-width: 70%; /* Limit title width */
-  margin-right: 10px; /* Space between title and buttons */
-  overflow: hidden; /* Hide overflow text */
-  text-overflow: ellipsis; /* Show ellipsis for overflow text */
-  white-space: nowrap; /* Prevent text from wrapping */
-}
-
-.button-container {
-  display: flex; /* Flexbox for button alignment */
-  gap: 10px; /* Add some space between buttons */
-}
-
-.batafsil1 {
-  padding: 7px 11px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.batafsil1:hover {
-  background-color: #0056b3; /* Change on hover */
-}
-
-.deleteitem1 {
-  padding: 4px 8px;
-  background-color: #e94848;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 0.7em;
-}
-
-.deleteitem1:hover {
-  background-color: #f5230c; /* Change on hover */
-}
-
-.upload-section {
-  margin: 20px auto;
-  padding: 18px 18px 14px 18px;
-  border: 1.5px solid #e3e8ee;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(44,83,100,0.08);
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}mna
-
-.upload-section h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.08em;
-  color: #1976ed;
-  font-weight: 600;
-}
-
-.upload-section input[type="text"] {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1.5px solid #b3c6e0;
-  border-radius: 7px;
-  font-size: 1em;
-  margin-bottom: 6px;
-  background: #f4f8fb;
-  transition: border 0.2s;
-}
-.upload-section input[type="text"]:focus {
-  border: 1.5px solid #1976ed;
-  outline: none;
-}
-
-.file-input {
-  margin-bottom: 0;
-  width: 100%;
-  padding: 6px 0;
-  border-radius: 7px;
-  border: 1.5px solid #b3c6e0;
-  background: #f4f8fb;
-  font-size: 0.98em;
-  transition: border 0.2s;
-}
-.file-input:focus {
-  border: 1.5px solid #1976ed;
-  outline: none;
-}
-
-.upload-button {
-  background: #2988ee;
-  
-  padding: 8px 22px;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: 500;
-  margin-top: 8px;
-  align-self: flex-end;
-  box-shadow: 0 2px 8px #1976ed22;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
-}
-.upload-button:hover {
-  background: #2988ee;
-  box-shadow: 0 6px 18px #1976ed33;
-  transform: translateY(-2px) scale(1.04);
+.card-badge.ppt {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 }

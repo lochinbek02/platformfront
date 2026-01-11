@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import axiosInstance from '../../../axiosInstance/axiosInstance';
+import { FaArrowLeft, FaCheckCircle, FaClock, FaQuestionCircle } from 'react-icons/fa';
 import './TestStart.css';
 
 function TestStart() {
@@ -8,117 +9,165 @@ function TestStart() {
     const navigate = useNavigate();
     const [selectedTest, setSelectedTest] = useState(null);
     const [answers, setAnswers] = useState({});
-    const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         const fetchTest = async () => {
             try {
                 if (id) {
-                    const response = await axios.get(`http://localhost:8000/api/test/${id}/`);
+                    const response = await axiosInstance.get(`test/${id}/`);
                     setSelectedTest(response.data);
-                } else {
-                    console.error("ID mavjud emas");
                 }
             } catch (error) {
                 console.error("Xatolik yuz berdi:", error);
+            } finally {
+                setLoading(false);
             }
         };
-
         fetchTest();
     }, [id]);
 
-    const handleAnswerChange = (question, answer) => {
-        setAnswers({
-            ...answers,
-            [question]: answer
-        });
+    const handleAnswerChange = (question, option) => {
+        setAnswers(prev => ({ ...prev, [question]: option }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (Object.keys(answers).length < Object.keys(selectedTest).length) {
+            if (!window.confirm("Barcha savollarga javob berilmadi. Testni yakunlamoqchimisiz?")) return;
+        }
 
+        setIsSubmitting(true);
         let correctCount = 0;
-        let incorrectCount = 0;
-        const detailedResults = {}; // To'liq natijalar uchun ob'ekt
+        const detailedResults = {};
 
-        // Natijani hisoblash
         Object.keys(selectedTest).forEach((question) => {
             const correctAnswer = Object.keys(selectedTest[question]).find(
                 (option) => selectedTest[question][option] === true
             );
             const userAnswer = answers[question];
 
-            // Savol va tanlangan javoblarni saqlash
             detailedResults[question] = {
                 selectedAnswer: userAnswer,
                 correctAnswer: correctAnswer,
                 isCorrect: userAnswer === correctAnswer,
-                options: selectedTest[question] // Savolning barcha variantlari
+                options: selectedTest[question]
             };
 
             if (userAnswer === correctAnswer) {
                 correctCount += 1;
-            } else {
-                incorrectCount += 1;
             }
         });
-        localStorage.setItem("testResults", JSON.stringify(detailedResults));
-        const resultData = {
-            correct: correctCount,
-            incorrect: incorrectCount,
-            details: detailedResults // To'liq natijalarni qo'shish
-        };
 
-        setResult(resultData);
+        localStorage.setItem("testResults", JSON.stringify(detailedResults));
 
         try {
             const userId = localStorage.getItem("user_id");
-
-            // POST request to save test result
-            const response = await axios.post("http://localhost:8000/api/save_test_result/", {
+            await axiosInstance.post("save_test_result/", {
                 user_id: userId,
                 test_id: id,
                 score: correctCount,
                 total_questions: Object.keys(selectedTest).length
             });
-
-            console.log("Natijalar saqlandi:", response.data);
-            navigate("/tests");  // Foydalanuvchini "/tests" manziliga qaytarish
+            navigate(`/test-natija/${id}`);
         } catch (error) {
             console.error("Natijani saqlashda xatolik yuz berdi:", error);
+            navigate(`/test-natija/${id}`); // Still navigate to show local results
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
-    if (!selectedTest) {
-        return <div className="loading">Yuklanmoqda...</div>;
+    if (loading) {
+        return (
+            <div className="page-container">
+                <div className="loading-state">Test yuklanmoqda...</div>
+            </div>
+        );
     }
 
+    if (!selectedTest) {
+        return (
+            <div className="page-container">
+                <div className="error-state">
+                    <p>Test topilmadi.</p>
+                    <Link to="/tests" className="back-link">Orqaga qaytish</Link>
+                </div>
+            </div>
+        );
+    }
+
+    const questionsList = Object.keys(selectedTest);
+    const progress = Math.round((Object.keys(answers).length / questionsList.length) * 100);
+
     return (
-        <form className="test-container" onSubmit={handleSubmit}>
-            <h2>Test Boshlandi</h2>
-            {Object.keys(selectedTest).map((question, index) => (
-                <div key={index} className="question-block">
-                    <h3 className="question">{question}</h3>
-                    <div className="options">
-                        {Object.keys(selectedTest[question]).map((option, i) => (
-                            <label key={i} className="option">
-                                <input
-                                    type="radio"
-                                    name={question}
-                                    value={option}
-                                    onChange={() => handleAnswerChange(question, option)}
-                                    checked={answers[question] === option}
-                                />
-                                {option}
-                            </label>
-                        ))}
+        <div className="page-container">
+            <div className="test-interface">
+                <div className="test-sidebar">
+                    <Link to="/tests" className="back-btn-simple">
+                        <FaArrowLeft /> Orqaga
+                    </Link>
+                    <div className="test-stats">
+                        <div className="stat-item">
+                            <FaQuestionCircle />
+                            <span>Savollar: {questionsList.length}</span>
+                        </div>
+                        <div className="stat-item">
+                            <FaClock />
+                            <span>Vaqt: Cheklanmagan</span>
+                        </div>
+                    </div>
+                    <div className="test-progress-card">
+                        <div className="progress-info">
+                            <span>Jarayon</span>
+                            <span>{progress}%</span>
+                        </div>
+                        <div className="progress-bar-container">
+                            <div className="progress-bar-fill" style={{ width: `${progress}%` }}></div>
+                        </div>
                     </div>
                 </div>
-            ))}
-            <button type="submit" className="submit-btn">Testni yakunlash</button>
 
-            
-        </form>
+                <form className="test-main" onSubmit={handleSubmit}>
+                    <div className="test-header-simple">
+                        <h1>Bilimingizni sinab ko'ring</h1>
+                        <p>Barcha savollarga diqqat bilan javob bering</p>
+                    </div>
+
+                    <div className="questions-list">
+                        {questionsList.map((question, index) => (
+                            <div key={index} className={`question-card ${answers[question] ? 'answered' : ''}`}>
+                                <div className="question-num">Savol {index + 1}</div>
+                                <h3 className="question-text">{question}</h3>
+                                <div className="options-grid">
+                                    {Object.keys(selectedTest[question]).map((option, i) => (
+                                        <label key={i} className={`option-label ${answers[question] === option ? 'selected' : ''}`}>
+                                            <input
+                                                type="radio"
+                                                name={`q-${index}`}
+                                                value={option}
+                                                onChange={() => handleAnswerChange(question, option)}
+                                                checked={answers[question] === option}
+                                                className="hidden-radio"
+                                            />
+                                            <span className="option-marker">{String.fromCharCode(65 + i)}</span>
+                                            <span className="option-text">{option}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="test-footer">
+                        <button type="submit" className="finish-btn" disabled={isSubmitting}>
+                            {isSubmitting ? 'Saqlanmoqda...' : <><FaCheckCircle /> Testni yakunlash</>}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 }
 

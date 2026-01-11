@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../axiosInstance/axiosInstance';
 import './Login.css'
 
 const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => {
@@ -19,18 +19,18 @@ const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', {
+            const response = await axiosInstance.post('login/', {
                 username,
                 password
             });
-            
+
             // Tokenlarni localStoragega saqlash
             localStorage.setItem('access', response.data.access);
             if (response.data.refresh) {
                 localStorage.setItem('refresh', response.data.refresh);
             }
-            
-            const userId = response.data.user_id;  
+
+            const userId = response.data.user_id;
             localStorage.setItem('user_id', userId);
             localStorage.setItem('isAuthenticated', 'true');
 
@@ -50,7 +50,7 @@ const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => 
                 setIsSuperAdmin(false);
                 localStorage.setItem('isSuperAdmin', 'false');
             }
-            
+
             setIsAuthenticated(true);
         } catch (error) {
             setMessage('Login failed');
@@ -65,34 +65,34 @@ const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => 
     };
 
     return (
-       
-            
-            <div className="homewrappper">
+
+
+        <div className="homewrappper">
             <div className="wrapper" >
                 <form className="form-signin" onSubmit={handleSubmit}>
                     <h2 className="form-signin-heading">Please login</h2>
-                    
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        name="username" 
-                        placeholder="Username" 
+
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="username"
+                        placeholder="Username"
                         autoFocus
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                    <input 
-                        type="password" 
-                        className="form-control" 
-                        name="password" 
-                        placeholder="Password" 
+                    <input
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        placeholder="Password"
                         autoFocus
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                   
+
                     {/* <label className="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"/> Remember me
                     </label> */}
@@ -100,9 +100,9 @@ const Login = ({ message, setMessage, setIsAuthenticated, setIsSuperAdmin }) => 
                     {/* {message} */}
                 </form>
             </div>
-             
-            </div>
-        
+
+        </div>
+
     );
 };
 
