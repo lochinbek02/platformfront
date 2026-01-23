@@ -121,7 +121,7 @@ function VideosView() {
             {/* Page Header */}
             <div className="page-header">
                 <div className="page-header-content">
-                    <h1>Video darslar</h1>
+                    <h1>Kompyuter imitatsion model 2</h1>
                     <p>Ta'limiy video materiallar to'plami</p>
                 </div>
                 {isSuperAdmin && (

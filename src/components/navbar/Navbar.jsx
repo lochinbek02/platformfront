@@ -22,7 +22,7 @@ function Navbar({ setIsAuthenticated, isSuperAdmin }) {
         { to: '/mainview', label: "Nazariy ma'lumotlar" },
         { to: '/slide', label: 'Taqdimot' },
         { to: '/models', label: 'Kompyuter imitatsion model' },
-        { to: '/vedios', label: 'Videodars' },
+        { to: '/vedios', label: 'Kompyuter imitatsion model 2' },
         { to: '/tests', label: 'Test' },
     ];
 
@@ -44,7 +44,7 @@ function Navbar({ setIsAuthenticated, isSuperAdmin }) {
                     </li>
                 ))}
                 <li className="user-section">
-                    
+
                     <button type="button" className="logout-btn-adv" onClick={buttonClickLogout}>
                         <FaSignOutAlt className="logout-icon" />
                         <span className="logout-text">Logout</span>

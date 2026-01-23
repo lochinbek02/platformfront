@@ -53,7 +53,7 @@ const SidebarContent = React.memo(({
         { to: '/mainview', icon: <FaBook />, label: "Nazariy ma'lumotlar" },
         { to: '/slide', icon: <MdSlideshow />, label: 'Interaktiv taqdimot' },
         { to: '/models', icon: <FaDesktop />, label: 'Kompyuter imitatsion model' },
-        { to: '/vedios', icon: <FaVideo />, label: 'Videodars (+audio)' },
+        { to: '/vedios', icon: <FaVideo />, label: 'Kompyuter imitatsion model 2' },
         { to: '/tests', icon: <FaClipboardList />, label: 'Test' },
         { to: '/innovative-scheme', icon: <FaProjectDiagram />, label: "Innovatsion ta'lim sxemasi" },
     ];

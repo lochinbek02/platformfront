@@ -49,7 +49,7 @@ function Dashboard() {
         },
         {
             icon: <FaVideo />,
-            title: "Videodars (+audio)",
+            title: "Kompyuter imitatsion model 2",
             desc: "Ta'limiy video materiallar",
             link: "/vedios",
             color: "#f59e0b"
